@@ -173,99 +173,7 @@ blogspace/
 
 ---
 
-## 🚀 Getting Started
 
-### Prerequisites
-
-- Node.js v18+
-- MongoDB (local or Atlas)
-- npm or yarn
-
----
-
-### Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/SHASHWAT13244/blogspace.git
-cd blogspace
-```
-
-Install backend dependencies
-
-```bash
-cd backend
-npm install
-```
-
-Install frontend dependencies
-
-```bash
-cd ../frontend
-npm install
-```
-
----
-
-## ⚙️ Environment Setup
-
-### Backend `.env`
-
-```
-PORT=8000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-```
-
-### Frontend `.env`
-
-```
-VITE_BACKEND_URL=http://localhost:8000/api
-```
-
----
-
-## ▶️ Run Development Servers
-
-Backend
-
-```bash
-cd backend
-npm run dev
-```
-
-Frontend
-
-```bash
-cd frontend
-npm run dev
-```
-
----
-
-## 🌐 Access the Application
-
-Frontend  
-```
-http://localhost:5173
-```
-
-Backend API  
-```
-http://localhost:8000/api
-```
-
----
-
-## 🧪 Test Credentials
-
-```
-Email: test@example.com
-Password: password123
-```
-
----
 
 ## 🎨 Design Highlights
 
@@ -302,5 +210,5 @@ Email: **shashwatk340@gmail.com**
 
 ---
 
-⭐ If you like this project, consider giving it a star on GitHub!
+
 
