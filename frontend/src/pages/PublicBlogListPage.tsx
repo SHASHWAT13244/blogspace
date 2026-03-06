@@ -28,15 +28,11 @@ import {
   Zap,
   Gem,
   Rocket,
-  Brain,
   Cpu,
-  Layers,
-  Infinity,
   Radio,
   Hexagon
 } from 'lucide-react';
 import { Navbar } from '../components/UI/Navbar';
-import { Button } from '../components/UI/Button';
 import { useAuth } from '../hooks/useAuth';
 import { apiService } from '../services/api';
 import type { BlogType } from '../types';
