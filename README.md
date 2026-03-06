@@ -1,5 +1,6 @@
 📝 BlogSpace – Next-Gen Markdown Editor & Blogging Platform
 MongoDB • Express • React • Node.js • TypeScript • Tailwind CSS • JWT Auth
+
 https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white
 https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
 https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black
@@ -164,18 +165,44 @@ blogspace/
 │   └── src/
 │       ├── components/
 │       │   ├── Auth/
+│       │   │   ├── AuthScreen.tsx
+│       │   │   ├── Login.tsx
+│       │   │   └── Register.tsx
 │       │   ├── Editor/
+│       │   │   └── Editor.tsx
 │       │   ├── Preview/
+│       │   │   └── Preview.tsx
 │       │   ├── Sidebar/
+│       │   │   └── Sidebar.tsx
 │       │   ├── FileExplorer/
+│       │   │   ├── FileExplorer.tsx
+│       │   │   ├── FileItem.tsx
+│       │   │   └── FolderItem.tsx
 │       │   └── UI/
+│       │       ├── Button.tsx
+│       │       ├── Input.tsx
+│       │       ├── Navbar.tsx
+│       │       └── AddItemInput.tsx
 │       ├── contexts/
+│       │   ├── AuthContext.tsx
+│       │   └── AuthContextDef.ts
 │       ├── hooks/
+│       │   ├── useAuth.ts
+│       │   ├── useDebounce.ts
+│       │   └── useFileSystem.ts
 │       ├── pages/
+│       │   ├── DashboardPage.tsx
+│       │   ├── EditorPage.tsx
+│       │   ├── BlogListPage.tsx
+│       │   ├── BlogDetailPage.tsx
+│       │   └── PublicBlogListPage.tsx
 │       ├── services/
+│       │   └── api.ts
 │       ├── types/
+│       │   └── index.ts
 │       ├── App.tsx
-│       └── main.tsx
+│       ├── main.tsx
+│       └── index.css
 │
 ├── package.json
 └── README.md
@@ -190,7 +217,7 @@ Tailwind CSS	Utility-first styling with custom plugins
 JWT	Secure user authentication
 Bcrypt	Password hashing (10 salt rounds)
 Vite	Fast frontend build tool with HMR
-React Router	Client-side routing with protected routes
+React Router DOM v7	Client-side routing with protected routes
 React Markdown	Markdown parsing and rendering
 html2pdf.js	PDF export functionality
 Lucide React	Beautiful, consistent icons
@@ -235,8 +262,97 @@ Neubrutalism cards with hover effects
 🔗 Frontend – Explore BlogSpace
 🔗 Backend API – RESTful API endpoint
 
+🚦 Getting Started
+Prerequisites
+Node.js (v18 or higher)
 
+MongoDB (local or Atlas)
 
+npm or yarn
+
+Installation
+Clone the repository
+
+bash
+git clone https://github.com/SHASHWAT13244/blogspace.git
+cd blogspace
+Install backend dependencies
+
+bash
+cd backend
+npm install
+Install frontend dependencies
+
+bash
+cd ../frontend
+npm install
+Environment Setup
+
+Backend (.env):
+
+env
+PORT=8000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+Frontend (.env):
+
+env
+VITE_BACKEND_URL=http://localhost:8000/api
+Start development servers
+
+Backend:
+
+bash
+cd backend
+npm run dev
+Frontend (new terminal):
+
+bash
+cd frontend
+npm run dev
+Access the application
+
+Frontend: http://localhost:5173
+
+Backend API: http://localhost:8000/api
+
+🧪 Test Credentials
+javascript
+Email: test@example.com
+Password: password123
+📊 API Endpoints
+Authentication (/api/auth)
+Method	Endpoint	Description
+POST	/register	Register new user
+POST	/login	Login user
+POST	/refresh	Refresh access token
+POST	/logout	Logout from current device
+POST	/logout-all	Logout from all devices
+File Management (/api/files)
+Method	Endpoint	Description
+GET	/	Get all files and folders
+POST	/file	Create new file
+POST	/folder	Create new folder
+PUT	/file/:id	Update file
+PUT	/folder/:id	Update folder
+DELETE	/:id	Delete item
+Blog Routes (/api/blogs)
+Public Routes
+Method	Endpoint	Description
+GET	/public	Get all published blogs
+GET	/public/:slug	Get blog by slug
+POST	/public/:id/track	Track interactions
+GET	/public/:id/like-status	Check like status
+GET	/search	Advanced search
+Protected Routes
+Method	Endpoint	Description
+POST	/publish	Publish blog
+GET	/	Get user blogs
+GET	/dashboard	Get dashboard analytics
+GET	/:id	Get specific blog
+PUT	/:id	Update blog
+DELETE	/:id	Delete blog
+GET	/:id/analytics	Get blog analytics
 🧑‍💻 Author
 Shashwat Khandelwal
 🎓 B.Tech Computer Science Student | 💻 MERN Stack Developer | 🎨 UI/UX Enthusiast
