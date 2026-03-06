@@ -206,7 +206,7 @@ B.Tech Computer Science Student | MERN Stack Developer | UI/UX Enthusiast
 [GitHub](https://github.com/SHASHWAT13244)  
 [LinkedIn](https://www.linkedin.com/in/shashwat-khandelwal-a0564532b/)  
 
-Email: **shashwatk340@gmail.com**
+
 
 ---
 
