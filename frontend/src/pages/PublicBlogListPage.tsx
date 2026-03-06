@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-  import { 
+import { 
   Eye, 
   Heart, 
   Calendar, 
@@ -24,7 +24,16 @@ import { useNavigate } from 'react-router-dom';
   Facebook,
   Instagram,
   Linkedin,
-  Github
+  Github,
+  Zap,
+  Gem,
+  Rocket,
+  Brain,
+  Cpu,
+  Layers,
+  Infinity,
+  Radio,
+  Hexagon
 } from 'lucide-react';
 import { Navbar } from '../components/UI/Navbar';
 import { Button } from '../components/UI/Button';
@@ -39,6 +48,8 @@ export const PublicBlogListPage: React.FC = () => {
   const [recentBlogs, setRecentBlogs] = useState<BlogType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
   const stats = {
     totalBlogs: 500,
     totalAuthors: 150,
@@ -48,6 +59,13 @@ export const PublicBlogListPage: React.FC = () => {
 
   useEffect(() => {
     loadHomePageData();
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const loadHomePageData = async () => {
@@ -55,10 +73,9 @@ export const PublicBlogListPage: React.FC = () => {
       setLoading(true);
       setError(null);
       
-      // Load different sections of blogs
       const [featuredResponse, recentResponse] = await Promise.all([
-        apiService.getAllPublicBlogs({ page: 1, limit: 3 }), // Featured blogs
-        apiService.getAllPublicBlogs({ page: 1, limit: 6 }), // Recent blogs
+        apiService.getAllPublicBlogs({ page: 1, limit: 3 }),
+        apiService.getAllPublicBlogs({ page: 1, limit: 6 }),
       ]);
       
       setFeaturedBlogs(featuredResponse.blogs.slice(0, 3));
@@ -101,86 +118,125 @@ export const PublicBlogListPage: React.FC = () => {
     return num.toString();
   };
 
-  // Enhanced Hero Section with animations and glassmorphism
+  // 2026 Hero Section with Kinetic Typography
   const HeroSection = () => (
-    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-pink-500/25 rounded-full blur-3xl animate-pulse delay-2000"></div>
+    <div className="relative min-h-screen bg-[#0A0A0F] text-white overflow-hidden">
+      {/* Interactive Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      
+      {/* Mouse-tracked Orbs */}
+      <div 
+        className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-violet-600/20 via-fuchsia-600/20 to-indigo-600/20 blur-3xl transition-transform duration-700 ease-out"
+        style={{
+          transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+          left: '10%',
+          top: '20%'
+        }}
+      />
+      <div 
+        className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-r from-amber-600/20 via-orange-600/20 to-rose-600/20 blur-3xl transition-transform duration-700 ease-out"
+        style={{
+          transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`,
+          right: '10%',
+          bottom: '20%'
+        }}
+      />
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/30 rounded-full animate-float-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${10 + Math.random() * 10}s`
+            }}
+          />
+        ))}
       </div>
       
-      {/* Glassmorphism overlay */}
       <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
       
-      {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
         <div className="text-center">
-          {/* Animated badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 animate-fade-in">
-            <Sparkles className="w-4 h-4 mr-2 text-yellow-400" />
-            <span className="text-sm font-medium">Welcome to the Future of Blogging</span>
+          {/* 2026 Neubrutalism Badge */}
+          <div className="inline-flex items-center px-6 py-3 rounded-none bg-black border-2 border-white/20 mb-8 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+            <Zap className="w-5 h-5 mr-2 text-yellow-400 animate-pulse" />
+            <span className="text-sm font-bold tracking-wider text-white">EST. 2026 • NEXT GEN PLATFORM</span>
           </div>
           
-          {/* Main heading with gradient text */}
-          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight animate-slide-up">
-            <span className="block text-white">Discover</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 animate-gradient">
+          {/* Kinetic Typography Main Heading */}
+          <h1 className="text-7xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white animate-text-shimmer">
+              Discover
+            </span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 animate-gradient-x">
               Amazing Stories
             </span>
           </h1>
           
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in-delay">
-            Join our vibrant community of <span className="text-yellow-400 font-semibold">visionary writers</span> and 
-            <span className="text-pink-400 font-semibold"> curious readers</span>. Share your thoughts, discover new perspectives, and be part of something extraordinary.
+          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in-up">
+            <span className="relative inline-block">
+              <span className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 blur-lg"></span>
+              <span className="relative">Join our vibrant community</span>
+            </span>{' '}
+            of <span className="text-white font-medium">visionary writers</span> and{' '}
+            <span className="text-white font-medium">curious readers</span>.
           </p>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 animate-fade-in-delay-2">
-            <Button
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+            <button
               onClick={() => navigate('/blog')}
-              className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-10 py-4 rounded-2xl shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+              className="group relative px-10 py-5 bg-white text-black font-bold text-lg transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.3)] active:translate-x-0 active:translate-y-0 active:shadow-none"
             >
-              <Search className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              Explore All Blogs
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              <span className="relative z-10 flex items-center gap-3">
+                <Search className="w-5 h-5" />
+                Explore All Blogs
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+              </span>
+            </button>
+            
             {user ? (
-              <Button
+              <button
                 onClick={() => navigate('/dashboard')}
-                className="group bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-lg px-10 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+                className="group px-10 py-5 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105"
               >
-                <PenTool className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                Go to Dashboard
-              </Button>
+                <span className="flex items-center gap-3">
+                  <PenTool className="w-5 h-5" />
+                  Go to Dashboard
+                </span>
+              </button>
             ) : (
-              <Button
+              <button
                 onClick={() => navigate('/register')}
-                className="group bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-lg px-10 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+                className="group px-10 py-5 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105"
               >
-                <Users className="w-5 h-5 group-hover:bounce transition-transform" />
-                Join Community
-              </Button>
+                <span className="flex items-center gap-3">
+                  <Users className="w-5 h-5" />
+                  Join Community
+                </span>
+              </button>
             )}
           </div>
           
-          {/* Floating stats preview */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
-              { number: formatNumber(stats.totalBlogs), label: 'Stories', icon: BookOpen, color: 'from-blue-400 to-cyan-400' },
-              { number: formatNumber(stats.totalAuthors), label: 'Authors', icon: Users, color: 'from-green-400 to-emerald-400' },
-              { number: formatNumber(stats.totalViews), label: 'Views', icon: Eye, color: 'from-yellow-400 to-orange-400' },
-              { number: formatNumber(stats.totalLikes), label: 'Likes', icon: Heart, color: 'from-pink-400 to-rose-400' }
+              { number: formatNumber(stats.totalBlogs), label: 'Stories', icon: BookOpen, color: 'from-violet-500 to-fuchsia-500' },
+              { number: formatNumber(stats.totalAuthors), label: 'Authors', icon: Users, color: 'from-blue-500 to-cyan-500' },
+              { number: formatNumber(stats.totalViews), label: 'Views', icon: Eye, color: 'from-amber-500 to-orange-500' },
+              { number: formatNumber(stats.totalLikes), label: 'Likes', icon: Heart, color: 'from-rose-500 to-pink-500' }
             ].map((stat, index) => (
-              <div key={index} className="group">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
-                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${stat.color} mb-4`}>
+              <div key={index} className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 p-6 transform hover:scale-105 hover:-rotate-1 transition-all duration-300">
+                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-none bg-gradient-to-r ${stat.color} mb-4`}>
                     <stat.icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-3xl font-bold mb-2">{stat.number}</div>
-                  <div className="text-gray-300 text-sm font-medium">{stat.label}</div>
+                  <div className="text-3xl font-bold mb-2 font-mono">{stat.number}</div>
+                  <div className="text-xs font-bold tracking-wider text-gray-400">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -190,93 +246,84 @@ export const PublicBlogListPage: React.FC = () => {
     </div>
   );
 
-  // Enhanced Featured Blogs Section with better cards
+  // 2026 Featured Blogs Section with Neubrutalism Cards
   const FeaturedBlogsSection = () => (
-    <div className="bg-gradient-to-br from-gray-50 to-blue-50 py-24 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-purple-200/30 rounded-full blur-3xl"></div>
-      </div>
+    <div className="relative bg-[#0A0A0F] py-24 overflow-hidden border-t border-white/10">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-violet-900/20 via-transparent to-transparent"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-200 mb-6">
-            <Star className="w-4 h-4 mr-2 text-purple-600" />
-            <span className="text-sm font-semibold text-purple-800">Featured Stories</span>
+          <div className="inline-flex items-center px-4 py-2 bg-black border-2 border-violet-500/30 mb-6">
+            <Gem className="w-4 h-4 mr-2 text-violet-400" />
+            <span className="text-sm font-bold tracking-wider text-white">CURATED PICKS</span>
           </div>
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Hand-picked <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Masterpieces</span>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tighter">
+            Hand-picked
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400"> Masterpieces</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover the most compelling stories from our talented community of writers
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Discover the most compelling stories from our talented community
           </p>
         </div>
         
-        {/* Featured blogs grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {featuredBlogs.map((blog, index) => (
             <div key={blog._id} className="group relative">
-              <div className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-105 border border-gray-100">
-                {/* Card header with featured badge */}
-                <div className="relative p-8 pb-6">
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                    <div className="text-white font-bold text-lg">#{index + 1}</div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"></div>
+              <div className="relative bg-black border-2 border-white/10 p-8 transform hover:scale-[1.02] hover:-rotate-1 transition-all duration-300">
+                <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center">
+                  <span className="text-white font-black text-lg">#{index + 1}</span>
+                </div>
+                
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center bg-white/5 px-3 py-1 border border-white/10">
+                    <Star className="w-4 h-4 mr-2 text-yellow-400 fill-yellow-400" />
+                    <span className="text-sm font-bold text-white">FEATURED</span>
                   </div>
-                  
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center bg-gradient-to-r from-purple-100 to-pink-100 px-3 py-1 rounded-full">
-                      <Star className="w-4 h-4 mr-2 text-purple-600" />
-                      <span className="text-sm font-medium text-purple-800">Featured</span>
+                  <div className="flex items-center text-violet-400">
+                    <TrendingUp className="w-4 h-4 mr-1" />
+                    <span className="text-sm font-bold">TRENDING</span>
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-black text-white mb-4 cursor-pointer hover:text-violet-400 transition-colors line-clamp-2"
+                    onClick={() => handleViewBlog(blog)}>
+                  {blog.title}
+                </h3>
+                
+                <p className="text-gray-400 mb-6 line-clamp-3 text-sm leading-relaxed">{blog.excerpt}</p>
+                
+                <div className="flex items-center justify-between text-sm mb-6">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-violet-600 to-fuchsia-600 flex items-center justify-center mr-3">
+                      <User className="w-4 h-4 text-white" />
                     </div>
-                    <div className="flex items-center text-gray-500">
-                      <TrendingUp className="w-4 h-4 mr-1" />
-                      <span className="text-sm">Trending</span>
+                    <span className="font-bold text-white">{blog.userId.email}</span>
+                  </div>
+                  <div className="flex items-center text-gray-400">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    {formatDate(blog.publishedAt)}
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center text-blue-400 bg-blue-400/10 px-3 py-1 border border-blue-400/20">
+                      <Eye className="w-4 h-4 mr-1" />
+                      <span className="text-sm font-bold">{formatNumber(blog.views)}</span>
+                    </div>
+                    <div className="flex items-center text-rose-400 bg-rose-400/10 px-3 py-1 border border-rose-400/20">
+                      <Heart className="w-4 h-4 mr-1" />
+                      <span className="text-sm font-bold">{formatNumber(blog.likes)}</span>
                     </div>
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 cursor-pointer hover:text-purple-600 transition-colors group-hover:text-purple-600 line-clamp-2"
-                      onClick={() => handleViewBlog(blog)}>
-                    {blog.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed">{blog.excerpt}</p>
-                  
-                  {/* Author and date */}
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-3">
-                        <User className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="font-medium">{blog.userId.email}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {formatDate(blog.publishedAt)}
-                    </div>
-                  </div>
-                  
-                  {/* Stats and CTA */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                        <Eye className="w-4 h-4 mr-1" />
-                        <span className="text-sm font-medium">{formatNumber(blog.views)}</span>
-                      </div>
-                      <div className="flex items-center text-red-600 bg-red-50 px-3 py-1 rounded-full">
-                        <Heart className="w-4 h-4 mr-1" />
-                        <span className="text-sm font-medium">{formatNumber(blog.likes)}</span>
-                      </div>
-                    </div>
-                    <Button
-                      onClick={() => handleViewBlog(blog)}
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 flex items-center gap-2 group"
-                    >
-                      Read More
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </div>
+                  <button
+                    onClick={() => handleViewBlog(blog)}
+                    className="bg-white text-black px-6 py-2 font-bold text-sm hover:bg-violet-400 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    READ MORE
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -286,59 +333,63 @@ export const PublicBlogListPage: React.FC = () => {
     </div>
   );
 
-  // Enhanced Features Section with better icons and animations
+  // 2026 Features Section with Tech Aesthetic
   const FeaturesSection = () => (
-    <div className="bg-white py-24 relative overflow-hidden">
-      {/* Background patterns */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-600 to-pink-600"></div>
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative bg-[#0A0A0F] py-24 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Our Platform?</span>
+          <div className="inline-flex items-center px-4 py-2 bg-black border-2 border-cyan-500/30 mb-6">
+            <Cpu className="w-4 h-4 mr-2 text-cyan-400" />
+            <span className="text-sm font-bold tracking-wider text-white">TECH SPEC</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tighter">
+            Why Choose
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400"> Our Platform?</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Everything you need to share your ideas with the world, backed by powerful tools and an amazing community
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Everything you need to share your ideas with the world
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
               icon: PenTool,
-              title: "Intuitive Writing",
-              description: "Advanced BlogSpace with live preview, syntax highlighting, and collaborative features",
-              color: "from-blue-500 to-cyan-500",
-              bgColor: "from-blue-50 to-cyan-50"
+              title: "INTUITIVE WRITING",
+              description: "Advanced editor with live preview, syntax highlighting, and collaborative features",
+              color: "from-violet-500 to-fuchsia-500",
+              tech: "MARKDOWN v2.0"
             },
             {
               icon: Globe,
-              title: "Global Reach",
+              title: "GLOBAL REACH",
               description: "Share your stories with readers worldwide through our SEO-optimized platform",
-              color: "from-purple-500 to-pink-500",
-              bgColor: "from-purple-50 to-pink-50"
+              color: "from-cyan-500 to-blue-500",
+              tech: "CDN EDGE"
             },
             {
               icon: Users,
-              title: "Thriving Community",
-              description: "Connect with like-minded writers, get feedback, and build your audience organically",
-              color: "from-green-500 to-emerald-500",
-              bgColor: "from-green-50 to-emerald-50"
+              title: "THRIVING COMMUNITY",
+              description: "Connect with like-minded writers and build your audience organically",
+              color: "from-amber-500 to-orange-500",
+              tech: "SOCIAL v3.0"
             }
           ].map((feature, index) => (
             <div key={index} className="group relative">
-              <div className={`bg-gradient-to-br ${feature.bgColor} rounded-3xl p-8 h-full hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100`}>
-                <div className={`bg-gradient-to-r ${feature.color} rounded-2xl w-16 h-16 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="w-8 h-8 text-white" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
+              <div className="relative bg-black border-2 border-white/10 p-8 h-full transform hover:scale-105 hover:rotate-1 transition-all duration-300">
+                <div className="flex items-center justify-between mb-6">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <span className="text-xs font-mono text-gray-500">{feature.tech}</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
+                <h3 className="text-2xl font-black text-white mb-4 tracking-tight">{feature.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
+                
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
+                  <div className={`h-full bg-gradient-to-r ${feature.color} w-0 group-hover:w-full transition-all duration-500`}></div>
+                </div>
               </div>
             </div>
           ))}
@@ -347,86 +398,87 @@ export const PublicBlogListPage: React.FC = () => {
     </div>
   );
 
-  // Enhanced Recent Blogs Section with improved cards
+  // 2026 Recent Blogs Section
   const RecentBlogsSection = () => (
-    <div className="bg-gradient-to-br from-gray-50 to-purple-50 py-24">
+    <div className="relative bg-[#0A0A0F] py-24 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-16">
           <div className="text-center md:text-left mb-8 md:mb-0">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
-              Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Stories</span>
+            <div className="inline-flex items-center px-4 py-2 bg-black border-2 border-amber-500/30 mb-6">
+              <Radio className="w-4 h-4 mr-2 text-amber-400" />
+              <span className="text-sm font-bold tracking-wider text-white">LIVE FEED</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tighter">
+              Latest
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400"> Stories</span>
             </h2>
-            <p className="text-xl text-gray-600">Fresh content from our creative community</p>
+            <p className="text-xl text-gray-400">Fresh content from our creative community</p>
           </div>
-          <Button
+          <button
             onClick={() => navigate('/blog')}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-2xl text-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center gap-3 shadow-lg"
+            className="group px-8 py-4 bg-transparent border-2 border-white text-white font-bold hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
           >
             <Search className="w-5 h-5" />
-            View All Posts
-            <ArrowRight className="w-5 h-5" />
-          </Button>
+            VIEW ALL POSTS
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+          </button>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {recentBlogs.map((blog, index) => (
             <div key={blog._id} className="group relative">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-105 border border-gray-100">
-                {/* Card gradient top */}
-                <div className={`h-2 bg-gradient-to-r ${
-                  index % 3 === 0 ? 'from-blue-500 to-cyan-500' :
-                  index % 3 === 1 ? 'from-purple-500 to-pink-500' :
-                  'from-green-500 to-emerald-500'
-                }`}></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500"></div>
+              <div className="relative bg-black border-2 border-white/10 p-6 transform hover:scale-[1.02] transition-all duration-300">
+                <div className={`h-1 w-full bg-gradient-to-r ${
+                  index % 3 === 0 ? 'from-violet-500 to-fuchsia-500' :
+                  index % 3 === 1 ? 'from-cyan-500 to-blue-500' :
+                  'from-amber-500 to-orange-500'
+                } mb-4`}></div>
                 
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center text-gray-500">
-                      <BookOpen className="w-4 h-4 mr-2" />
-                      <span className="text-sm font-medium">Article</span>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-amber-400">
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    <span className="text-xs font-bold tracking-wider">ARTICLE</span>
+                  </div>
+                  <div className="text-xs font-mono text-gray-500">
+                    {formatDate(blog.publishedAt)}
+                  </div>
+                </div>
+                
+                <h3 className="text-xl font-black text-white mb-3 cursor-pointer hover:text-amber-400 transition-colors line-clamp-2"
+                    onClick={() => handleViewBlog(blog)}>
+                  {blog.title}
+                </h3>
+                
+                <p className="text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">
+                  {blog.excerpt}
+                </p>
+                
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-orange-600 flex items-center justify-center mr-3">
+                    <User className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-sm font-bold text-white">{blog.userId.email}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center text-blue-400 bg-blue-400/10 px-2 py-1 border border-blue-400/20">
+                      <Eye className="w-3 h-3 mr-1" />
+                      <span className="text-xs font-bold">{formatNumber(blog.views)}</span>
                     </div>
-                    <div className="text-sm text-gray-400">
-                      {formatDate(blog.publishedAt)}
+                    <div className="flex items-center text-rose-400 bg-rose-400/10 px-2 py-1 border border-rose-400/20">
+                      <Heart className="w-3 h-3 mr-1" />
+                      <span className="text-xs font-bold">{formatNumber(blog.likes)}</span>
                     </div>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 cursor-pointer hover:text-purple-600 transition-colors group-hover:text-purple-600 line-clamp-2"
-                      onClick={() => handleViewBlog(blog)}>
-                    {blog.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">
-                    {blog.excerpt}
-                  </p>
-                  
-                  {/* Author */}
-                  <div className="flex items-center mb-4">
-                    <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-3">
-                      <User className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="text-sm font-medium text-gray-700">{blog.userId.email}</span>
-                  </div>
-                  
-                  {/* Stats and CTA */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
-                        <Eye className="w-3 h-3 mr-1" />
-                        <span className="text-xs font-medium">{formatNumber(blog.views)}</span>
-                      </div>
-                      <div className="flex items-center text-red-600 bg-red-50 px-2 py-1 rounded-full">
-                        <Heart className="w-3 h-3 mr-1" />
-                        <span className="text-xs font-medium">{formatNumber(blog.likes)}</span>
-                      </div>
-                    </div>
-                    <Button
-                      onClick={() => handleViewBlog(blog)}
-                      className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 flex items-center gap-2 group"
-                    >
-                      Read
-                      <Play className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </div>
+                  <button
+                    onClick={() => handleViewBlog(blog)}
+                    className="bg-white/10 text-white px-4 py-2 text-xs font-bold hover:bg-white hover:text-black transition-colors flex items-center gap-2 group"
+                  >
+                    READ
+                    <Play className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -436,7 +488,7 @@ export const PublicBlogListPage: React.FC = () => {
     </div>
   );
 
-  // Enhanced Reviews Section with horizontal scrolling
+  // 2026 Reviews Section with Horizontal Scroll
   const ReviewsSection = () => {
     const reviews = [
       {
@@ -445,8 +497,8 @@ export const PublicBlogListPage: React.FC = () => {
         role: "Tech Blogger",
         avatar: "SJ",
         rating: 5,
-        review: "This platform has transformed how I share my tech insights. The BlogSpace is a game-changer, and the community engagement is phenomenal!",
-        bgGradient: "from-blue-500 to-cyan-500"
+        review: "This platform has transformed how I share my tech insights. The editor is a game-changer, and the community engagement is phenomenal!",
+        bgGradient: "from-violet-600 to-fuchsia-600"
       },
       {
         id: 2,
@@ -454,8 +506,8 @@ export const PublicBlogListPage: React.FC = () => {
         role: "Travel Writer",
         avatar: "MC",
         rating: 5,
-        review: "As a travel writer, I needed a platform that could handle both text and media beautifully. This exceeds all my expectations. The global reach is incredible!",
-        bgGradient: "from-purple-500 to-pink-500"
+        review: "As a travel writer, I needed a platform that could handle both text and media beautifully. This exceeds all my expectations.",
+        bgGradient: "from-cyan-600 to-blue-600"
       },
       {
         id: 3,
@@ -463,8 +515,8 @@ export const PublicBlogListPage: React.FC = () => {
         role: "Food Blogger",
         avatar: "ER",
         rating: 5,
-        review: "The engagement I get on my food blogs here is amazing. The platform's SEO features have helped me reach a much wider audience!",
-        bgGradient: "from-green-500 to-emerald-500"
+        review: "The engagement I get on my food blogs here is amazing. The platform's features have helped me reach a much wider audience!",
+        bgGradient: "from-amber-600 to-orange-600"
       },
       {
         id: 4,
@@ -473,7 +525,7 @@ export const PublicBlogListPage: React.FC = () => {
         avatar: "DK",
         rating: 5,
         review: "The writing experience is so smooth and distraction-free. I've published my entire short story series here with great success!",
-        bgGradient: "from-yellow-500 to-orange-500"
+        bgGradient: "from-emerald-600 to-teal-600"
       },
       {
         id: 5,
@@ -482,68 +534,64 @@ export const PublicBlogListPage: React.FC = () => {
         avatar: "LT",
         rating: 5,
         review: "The analytics features help me understand my audience better. Plus, the community here is so supportive and engaging!",
-        bgGradient: "from-red-500 to-pink-500"
+        bgGradient: "from-rose-600 to-pink-600"
       }
     ];
 
     return (
-      <div className="bg-white py-24 relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-100 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-blue-100 rounded-full blur-3xl"></div>
-        </div>
-
+      <div className="relative bg-[#0A0A0F] py-24 border-t border-white/10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-900/20 via-transparent to-transparent"></div>
+        
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-200 mb-6">
-              <Star className="w-4 h-4 mr-2 text-purple-600" />
-              <span className="text-sm font-semibold text-purple-800">What Our Writers Say</span>
+            <div className="inline-flex items-center px-4 py-2 bg-black border-2 border-yellow-500/30 mb-6">
+              <Star className="w-4 h-4 mr-2 text-yellow-400 fill-yellow-400" />
+              <span className="text-sm font-bold tracking-wider text-white">TRUSTED BY</span>
             </div>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">
-              Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Content Creators</span>
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tighter">
+              Loved by
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-400"> Creators</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Join thousands of satisfied writers who have found their voice on our platform
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Join thousands of satisfied writers who have found their voice
             </p>
           </div>
 
-          {/* Reviews slider */}
-          <div className="relative -mx-[calc((100vw-100%)/2)] w-screen">
-            {/* Gradient masks for scroll effect */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0F] to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0F] to-transparent z-10"></div>
 
-            {/* Scrolling container */}
             <div className="overflow-hidden w-full">
-              <div className="flex animate-scroll gap-6 py-8 px-8">
-                {/* Double the reviews for infinite scroll effect */}
-                {[...reviews, ...reviews].map((review, index) => (
+              <div className="flex animate-scroll-2026 gap-6 py-8 px-8">
+                {[...reviews, ...reviews, ...reviews].map((review, index) => (
                   <div
                     key={`${review.id}-${index}`}
-                    className="flex-none w-[400px] bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100 p-8"
+                    className="flex-none w-[400px] group relative"
                   >
-                    {/* Review header */}
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${review.bgGradient} flex items-center justify-center text-white font-bold text-lg`}>
-                        {review.avatar}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative bg-black border-2 border-white/10 p-8 transform hover:scale-105 hover:rotate-1 transition-all duration-300">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className={`w-12 h-12 bg-gradient-to-r ${review.bgGradient} flex items-center justify-center text-white font-black text-lg`}>
+                          {review.avatar}
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-black text-white">{review.name}</h4>
+                          <p className="text-xs font-mono text-gray-500">{review.role}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900">{review.name}</h4>
-                        <p className="text-sm text-gray-600">{review.role}</p>
+
+                      <div className="flex gap-1 mb-4">
+                        {Array.from({ length: review.rating }).map((_, i) => (
+                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                        ))}
+                      </div>
+
+                      <p className="text-gray-300 text-sm leading-relaxed">"{review.review}"</p>
+                      
+                      <div className="absolute bottom-4 right-4">
+                        <Hexagon className="w-6 h-6 text-white/20" />
                       </div>
                     </div>
-
-                    {/* Rating */}
-                    <div className="flex gap-1 mb-4">
-                      {Array.from({ length: review.rating }).map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-
-                    {/* Review content */}
-                    <p className="text-gray-600 leading-relaxed">{review.review}</p>
                   </div>
                 ))}
               </div>
@@ -554,59 +602,64 @@ export const PublicBlogListPage: React.FC = () => {
     );
   };
 
-  // Enhanced Call to Action Section
+  // 2026 Call to Action Section
   const CallToActionSection = () => (
-    <div className="relative bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 text-white py-24 overflow-hidden border-b-4 border-white">
-      {/* Animated background */}
+    <div className="relative bg-[#0A0A0F] py-32 overflow-hidden border-t border-white/10">
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,violet_0deg,transparent_60deg,transparent_300deg,fuchsia_360deg)] opacity-20 animate-spin-slow"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,white_0%,transparent_50%)] opacity-10"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
-          <Sparkles className="w-4 h-4 mr-2 text-yellow-400" />
-          <span className="text-sm font-medium">Join the Revolution</span>
+        <div className="inline-flex items-center px-6 py-3 bg-black border-2 border-white/20 mb-8 transform hover:scale-105 transition-transform">
+          <Rocket className="w-5 h-5 mr-2 text-white" />
+          <span className="text-sm font-bold tracking-wider text-white">JOIN THE REVOLUTION</span>
         </div>
         
-        <h2 className="text-6xl font-bold mb-8 leading-tight text-white">
-          Ready to Share Your
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-400">
+        <h2 className="text-6xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tighter">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 animate-gradient-x">
+            Ready to Share Your
+          </span>
+          <span className="block text-white">
             Unique Story?
           </span>
         </h2>
         
-        <p className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-          Join <span className="text-yellow-400 font-semibold">thousands of writers</span> who are already sharing their ideas and connecting with readers worldwide. Your voice matters.
+        <p className="text-2xl text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed">
+          Join <span className="text-white font-bold">thousands of writers</span> who are already sharing their ideas and connecting with readers worldwide.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           {user ? (
-            <Button
+            <button
               onClick={() => navigate('/dashboard')}
-              className="group bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white text-xl px-12 py-5 rounded-2xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+              className="group relative px-12 py-5 bg-white text-black font-black text-xl transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.3)] active:translate-x-0 active:translate-y-0 active:shadow-none"
             >
-              <PenTool className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-              Start Writing Now
-              <Sparkles className="w-6 h-6 group-hover:bounce transition-transform" />
-            </Button>
+              <span className="relative z-10 flex items-center gap-3">
+                <PenTool className="w-6 h-6" />
+                Start Writing Now
+                <Sparkles className="w-6 h-6 animate-pulse" />
+              </span>
+            </button>
           ) : (
             <>
-              <Button
+              <button
                 onClick={() => navigate('/register')}
-                className="group bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white text-xl px-12 py-5 rounded-2xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+                className="group relative px-12 py-5 bg-white text-black font-black text-xl transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.3)] active:translate-x-0 active:translate-y-0 active:shadow-none"
               >
-                <PenTool className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                Get Started Free
-                <Sparkles className="w-6 h-6 group-hover:bounce transition-transform" />
-              </Button>
-              <Button
+                <span className="relative z-10 flex items-center gap-3">
+                  <PenTool className="w-6 h-6" />
+                  Get Started Free
+                  <Sparkles className="w-6 h-6 animate-pulse" />
+                </span>
+              </button>
+              <button
                 onClick={() => navigate('/login')}
-                className="group bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xl px-12 py-5 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+                className="px-12 py-5 bg-transparent border-2 border-white text-white font-black text-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
               >
-                <User className="w-6 h-6 group-hover:bounce transition-transform" />
+                <User className="w-6 h-6" />
                 Sign In
-              </Button>
+              </button>
             </>
           )}
         </div>
@@ -614,38 +667,40 @@ export const PublicBlogListPage: React.FC = () => {
     </div>
   );
 
-  // Enhanced Footer Section
+  // 2026 Footer
   const FooterSection = () => (
-    <footer className="bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content */}
+    <footer className="relative bg-black text-white border-t border-white/10">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="mb-8">
-              <h3 className="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                BlogSpace
+              <h3 className="text-3xl font-black mb-4 tracking-tighter">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+                  BlogSpace
+                </span>
+                <span className="text-white text-sm font-mono ml-2">v2026.1</span>
               </h3>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-md">
+              <p className="text-gray-400 text-lg leading-relaxed max-w-md">
                 Empowering writers and readers to share stories, discover new perspectives, and build meaningful connections through the power of words.
               </p>
             </div>
             
-            {/* Social Media */}
             <div className="mb-8">
-              <h4 className="text-lg font-semibold mb-4 text-gray-200">Follow Us</h4>
+              <h4 className="text-sm font-bold tracking-wider text-gray-400 mb-4">FOLLOW US</h4>
               <div className="flex space-x-4">
                 {[
-                  { icon: Twitter, href: "#", color: "hover:text-blue-400" },
-                  { icon: Facebook, href: "#", color: "hover:text-blue-600" },
-                  { icon: Instagram, href: "#", color: "hover:text-pink-500" },
-                  { icon: Linkedin, href: "#", color: "hover:text-blue-500" },
-                  { icon: Github, href: "#", color: "hover:text-gray-400" }
+                  { icon: Twitter, href: "#", color: "hover:text-cyan-400" },
+                  { icon: Facebook, href: "#", color: "hover:text-blue-400" },
+                  { icon: Instagram, href: "#", color: "hover:text-pink-400" },
+                  { icon: Linkedin, href: "#", color: "hover:text-blue-400" },
+                  { icon: Github, href: "#", color: "hover:text-white" }
                 ].map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
-                    className={`w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-110 ${social.color}`}
+                    className={`w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110 hover:-rotate-3 ${social.color}`}
                   >
                     <social.icon className="w-5 h-5" />
                   </a>
@@ -654,9 +709,8 @@ export const PublicBlogListPage: React.FC = () => {
             </div>
           </div>
           
-          {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-gray-200">Quick Links</h4>
+            <h4 className="text-sm font-bold tracking-wider text-gray-400 mb-6">QUICK LINKS</h4>
             <ul className="space-y-4">
               {[
                 { label: "All Blogs", href: "/blog" },
@@ -668,7 +722,7 @@ export const PublicBlogListPage: React.FC = () => {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center group"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center group font-bold"
                   >
                     <ChevronRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
                     {link.label}
@@ -678,34 +732,32 @@ export const PublicBlogListPage: React.FC = () => {
             </ul>
           </div>
           
-          {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-gray-200">Get in Touch</h4>
+            <h4 className="text-sm font-bold tracking-wider text-gray-400 mb-6">GET IN TOUCH</h4>
             <div className="space-y-4">
               <div className="flex items-center text-gray-300">
-                <Mail className="w-5 h-5 mr-3 text-purple-400" />
-                <span>hello@blogspace.com</span>
+                <Mail className="w-5 h-5 mr-3 text-violet-400" />
+                <span>shashwat@blogspace.com</span>
               </div>
               <div className="flex items-center text-gray-300">
-                <Phone className="w-5 h-5 mr-3 text-purple-400" />
-                <span>+1 (555) 123-4567</span>
+                <Phone className="w-5 h-5 mr-3 text-violet-400" />
+                <span>+91 12345 67890</span>
               </div>
               <div className="flex items-center text-gray-300">
-                <MapPin className="w-5 h-5 mr-3 text-purple-400" />
-                <span>San Francisco, CA</span>
+                <MapPin className="w-5 h-5 mr-3 text-violet-400" />
+                <span>Raipur, Chhattisgarh, India</span>
               </div>
             </div>
             
-            {/* Newsletter */}
             <div className="mt-8">
-              <h5 className="text-md font-semibold mb-3 text-gray-200">Stay Updated</h5>
+              <h5 className="text-md font-bold mb-3 text-gray-200">STAY UPDATED</h5>
               <div className="flex">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-l-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="flex-1 px-4 py-2 bg-white/5 border-2 border-white/10 text-white placeholder-gray-500 font-mono text-sm focus:outline-none focus:border-violet-400"
                 />
-                <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-6 py-2 rounded-r-xl transition-all duration-300 transform hover:scale-105">
+                <button className="bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 py-2 font-bold hover:from-violet-700 hover:to-fuchsia-700 transition-colors">
                   <Mail className="w-5 h-5" />
                 </button>
               </div>
@@ -713,11 +765,10 @@ export const PublicBlogListPage: React.FC = () => {
           </div>
         </div>
         
-        {/* Bottom Bar */}
-        <div className="border-t border-white/20 py-8">
+        <div className="border-t border-white/10 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-gray-300 mb-4 md:mb-0">
-              <p>&copy; 2024 BlogSpace. All rights reserved.</p>
+            <div className="text-gray-400 font-mono text-sm mb-4 md:mb-0">
+              <span className="text-violet-400">©</span> 2026 BlogSpace. All rights reserved.
             </div>
             <div className="flex space-x-6">
               {[
@@ -728,7 +779,7 @@ export const PublicBlogListPage: React.FC = () => {
                 <a
                   key={index}
                   href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                  className="text-gray-400 hover:text-white transition-colors duration-200 text-xs font-bold tracking-wider"
                 >
                   {link.label}
                 </a>
@@ -740,54 +791,14 @@ export const PublicBlogListPage: React.FC = () => {
     </footer>
   );
 
-  // Enhanced Loading State
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+      <div className="min-h-screen bg-[#0A0A0F]">
         <Navbar onLogout={handleLogout} />
         <div className="pt-16">
           <div className="animate-pulse">
-            {/* Hero skeleton */}
-            <div className="bg-gradient-to-r from-purple-300 to-pink-300 h-screen mb-8 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/50 to-pink-400/50 animate-pulse"></div>
-              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
-                <div className="text-center">
-                  <div className="h-16 bg-white/20 rounded-2xl mb-8 max-w-4xl mx-auto"></div>
-                  <div className="h-8 bg-white/20 rounded-lg mb-8 max-w-2xl mx-auto"></div>
-                  <div className="flex justify-center gap-4">
-                    <div className="h-12 bg-white/20 rounded-2xl w-40"></div>
-                    <div className="h-12 bg-white/20 rounded-2xl w-40"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Content skeleton */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <div key={index} className="bg-white rounded-2xl shadow-lg p-8">
-                    <div className="h-6 bg-gray-200 rounded mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-6"></div>
-                    <div className="h-20 bg-gray-200 rounded"></div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <div key={index} className="bg-white rounded-2xl shadow-lg p-6">
-                    <div className="h-4 bg-gray-200 rounded mb-3"></div>
-                    <div className="h-6 bg-gray-200 rounded mb-4"></div>
-                    <div className="h-16 bg-gray-200 rounded mb-4"></div>
-                    <div className="flex justify-between items-center">
-                      <div className="h-4 bg-gray-200 rounded w-20"></div>
-                      <div className="h-8 bg-gray-200 rounded w-16"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="h-screen bg-gradient-to-r from-violet-900/50 to-fuchsia-900/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:64px_64px]"></div>
             </div>
           </div>
         </div>
@@ -795,25 +806,24 @@ export const PublicBlogListPage: React.FC = () => {
     );
   }
 
-  // Enhanced Error State
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
+      <div className="min-h-screen bg-[#0A0A0F]">
         <Navbar onLogout={handleLogout} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 pt-32">
           <div className="text-center">
-            <div className="bg-white rounded-3xl shadow-2xl p-16 max-w-2xl mx-auto">
-              <div className="bg-gradient-to-r from-red-500 to-pink-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8">
+            <div className="bg-black border-2 border-red-500/30 p-16 max-w-2xl mx-auto">
+              <div className="bg-gradient-to-r from-red-600 to-pink-600 w-20 h-20 flex items-center justify-center mx-auto mb-8">
                 <FileText className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Oops! Something went wrong</h2>
-              <p className="text-gray-600 mb-8 text-lg">{error}</p>
-              <Button 
+              <h2 className="text-3xl font-black text-white mb-4">Oops! Something went wrong</h2>
+              <p className="text-gray-400 mb-8 text-lg">{error}</p>
+              <button 
                 onClick={loadHomePageData}
-                className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-8 py-4 rounded-2xl text-lg font-medium transition-all duration-300 transform hover:scale-105"
+                className="bg-white text-black px-8 py-4 font-black text-lg hover:bg-violet-400 hover:text-white transition-colors"
               >
-                Try Again
-              </Button>
+                TRY AGAIN
+              </button>
             </div>
           </div>
         </div>
@@ -822,7 +832,7 @@ export const PublicBlogListPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#0A0A0F]">
       <Navbar onLogout={handleLogout} />
       
       <div className="pt-16">
@@ -835,61 +845,128 @@ export const PublicBlogListPage: React.FC = () => {
         <FooterSection />
       </div>
       
-      {/* Custom CSS for animations */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes fade-in {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+      <style>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
           }
-          
-          @keyframes slide-up {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
-          
-          @keyframes gradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes text-shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes gradient-x {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes float-particle {
+          0%, 100% {
+            transform: translate(0, 0);
+            opacity: 0;
           }
-          
-          .animate-fade-in { animation: fade-in 0.8s ease-out; }
-          .animate-fade-in-delay { animation: fade-in 0.8s ease-out 0.3s both; }
-          .animate-fade-in-delay-2 { animation: fade-in 0.8s ease-out 0.6s both; }
-          .animate-slide-up { animation: slide-up 1s ease-out; }
-          .animate-gradient { 
-            background-size: 200% 200%;
-            animation: gradient 3s ease infinite;
+          10%, 90% {
+            opacity: 1;
           }
-          
-          .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+          50% {
+            transform: translate(100px, -100px);
           }
-          
-          .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        }
+        
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
           }
-
-          @keyframes scroll {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
+          100% {
+            transform: translateX(100%);
           }
-
-          .animate-scroll {
-            animation: scroll 40s linear infinite;
+        }
+        
+        @keyframes scroll-2026 {
+          0% {
+            transform: translateX(0);
           }
-        `
-      }} />
+          100% {
+            transform: translateX(-33.33%);
+          }
+        }
+        
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fade-in-up 1s ease-out;
+        }
+        
+        .animate-text-shimmer {
+          background-size: 200% 200%;
+          animation: text-shimmer 4s ease infinite;
+        }
+        
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 6s ease infinite;
+        }
+        
+        .animate-float-particle {
+          animation: float-particle linear infinite;
+        }
+        
+        .animate-shimmer {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .animate-shimmer::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+          animation: shimmer 2s infinite;
+        }
+        
+        .animate-scroll-2026 {
+          animation: scroll-2026 40s linear infinite;
+        }
+        
+        .animate-scroll-2026:hover {
+          animation-play-state: paused;
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
     </div>
   );
-}; 
+};
