@@ -1,205 +1,243 @@
 📝 BlogSpace – Next-Gen Markdown Editor & Blogging Platform
-MongoDB • Express • React • Node.js • TypeScript • Tailwind CSS • JWT Auth
 
-https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white
-https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
-https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black
-https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white
-https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
-https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
-https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white
-https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
-https://img.shields.io/badge/Live-Demo-ff69b4?style=for-the-badge&logo=render
 
-A modern full-stack blogging platform that combines a powerful markdown editor with advanced blog management, analytics, and a stunning 2026-inspired UI — built with the MERN stack.
 
-GitHub Repository: https://github.com/SHASHWAT13244/blogspace.git
-Live Demo: https://blogspace-frontend-wxyh.onrender.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+A modern full-stack blogging platform that combines a powerful Markdown editor, advanced blog management, analytics, and a stunning 2026-inspired UI — built with the MERN stack.
+
+🔗 GitHub Repository:
+https://github.com/SHASHWAT13244/blogspace
+
+🌐 Live Demo:
+https://blogspace-frontend-wxyh.onrender.com/
 
 ✨ Overview
+
 BlogSpace transforms how writers create, manage, and publish their work by providing:
 
-📝 Real-time markdown editor with live preview
-📁 Hierarchical file system with nested folders
-📰 Blog publishing engine with SEO-friendly URLs
-🔍 Advanced search with relevance scoring
-📊 Comprehensive analytics dashboard
-🎨 2026 Neubrutalism UI with kinetic typography
-❤️ Social features – likes, shares, and engagement tracking
-🔐 Secure JWT authentication with multi-device session management
+📝 Real-time Markdown editor with live preview
 
-Built with the MERN stack and TypeScript, this application demonstrates advanced file management, real-time collaboration features, and cutting-edge UI/UX design principles.
+📁 Hierarchical file system with nested folders
+
+📰 Blog publishing engine with SEO-friendly URLs
+
+🔍 Advanced search with relevance scoring
+
+📊 Comprehensive analytics dashboard
+
+🎨 2026 Neubrutalism UI with kinetic typography
+
+❤️ Social engagement features (likes, shares)
+
+🔐 Secure JWT authentication with multi-device sessions
+
+Built with MERN + TypeScript, the project demonstrates advanced file management, analytics tracking, and modern UI/UX design.
 
 🔧 Key Features
 📝 Markdown Editor
+
 Real-time preview with syntax highlighting
 
-Live content saving with debounced API calls (1-second delay)
+Live auto-saving using debounced API calls (1 second)
 
 Dark-themed editor with monospace font
 
-Line count and file statistics display
+Line count and file statistics
 
 PDF export with one-click download
 
-Split-screen layout for simultaneous editing and preview
+Split-screen editing and preview
 
 📁 File Management System
-Create, rename, delete files and folders
+
+Create, rename, and delete files or folders
 
 Nested folder structure with unlimited depth
 
-Search functionality within your file system
+File system search functionality
 
 Automatic .md extension handling
 
-Hierarchical file explorer with expandable/collapsible folders
+Expandable/collapsible file explorer
 
-Inline editing for quick renaming
+Inline renaming
 
-Recursive deletion for folder contents
+Recursive deletion for folders
 
 📰 Blog Publishing Engine
-Publish markdown files as blog posts with one click
 
-Custom slug generation with uniqueness validation
+Publish Markdown files as blog posts
 
-Excerpt and tag management for discovery
+Custom SEO-friendly slugs
 
-Multiple status options – draft, published, archived
+Excerpt and tag management
+
+Blog status system:
+
+Draft
+
+Published
+
+Archived
 
 Automatic read time calculation (200 words/min)
 
-Meta title and description for SEO optimization
+Meta title and description for SEO
 
 Featured image support
 
-Update existing blogs while preserving analytics
+Update blogs without losing analytics
 
 🔍 Advanced Search & Discovery
-Full-text search across all published blogs
 
-Weighted relevance scoring (title:10x, meta:8x, excerpt:6x, tags:5x, content:3x)
+Full-text search across published blogs
+
+Weighted relevance scoring:
+
+Title → 10x
+
+Meta → 8x
+
+Excerpt → 6x
+
+Tags → 5x
+
+Content → 3x
 
 File name lookup with 5x weight
 
-Tag filtering for precise discovery
+Tag filtering
 
-Search suggestions based on popular tags
+Popular tag suggestions
 
-Sort options – relevance, date, views, likes
+Sorting options:
 
-Pagination (12 items per page)
+Relevance
+
+Date
+
+Views
+
+Likes
+
+Pagination (12 results per page)
 
 📊 Analytics Dashboard
-View count tracking with unique visitor counting
 
-Like/unlike functionality with user-specific toggle
+Unique view tracking
 
-Share tracking to measure social engagement
+Like/unlike system
 
-Daily analytics aggregation for trend analysis
+Share tracking
 
-Top performing blogs by views, likes, shares
+Daily analytics aggregation
 
-Recent activity feed for quick insights
+Top performing blogs
 
-Period-based filtering (7, 30, 90 days)
+Activity feed
+
+Period filtering:
+
+7 days
+
+30 days
+
+90 days
 
 👤 User Authentication
-JWT-based authentication (15min access, 7day refresh)
 
-Secure registration with bcrypt password hashing (10 rounds)
+JWT authentication
 
-Refresh token mechanism for seamless sessions
+15 minute access tokens
 
-Multi-device session management with token blacklisting
+7 day refresh tokens
 
-Protected routes with automatic redirects
+Password hashing with bcrypt (10 salt rounds)
 
-Logout from all devices functionality
+Refresh token mechanism
 
-Automatic token refresh on expiration
+Multi-device session management
 
-🎨 2026 Neubrutalism UI/UX
-Kinetic typography with animated gradient text
+Token blacklisting
+
+Protected routes
+
+Logout from all devices
+
+🎨 UI/UX Highlights
+
+BlogSpace uses 2026 design trends including:
+
+Kinetic typography with gradient animations
 
 Mouse-tracked interactive orbs
 
-Floating particle animations
+Floating particle effects
+
+Neubrutalism card design
 
 Gradient borders and hover effects
 
-Horizontal scrolling reviews section
+Horizontal scrolling review section
 
-Neubrutalism card designs with bold shadows
-
-Fully responsive across all devices
+Fully responsive layout
 
 📁 Project Structure
-text
 blogspace/
 │
-├── backend/                          # Node.js + Express API
-│   ├── controllers/                  # Route controllers
+├── backend/
+│   ├── controllers/
 │   │   ├── authController.js
 │   │   ├── blogController.js
 │   │   └── fileController.js
-│   ├── middleware/                   # Custom middleware
+│   │
+│   ├── middleware/
 │   │   └── auth.js
-│   ├── models/                        # MongoDB schemas
+│   │
+│   ├── models/
 │   │   ├── User.js
 │   │   ├── File.js
 │   │   ├── Folder.js
 │   │   ├── Blog.js
 │   │   ├── BlogAnalytics.js
 │   │   └── BlogLike.js
-│   ├── routes/                         # API endpoints
+│   │
+│   ├── routes/
 │   │   ├── auth.js
 │   │   ├── blogs.js
 │   │   └── files.js
+│   │
 │   └── server.js
 │
-├── frontend/                           # React + TypeScript + Vite
+├── frontend/
 │   ├── public/
 │   └── src/
 │       ├── components/
 │       │   ├── Auth/
-│       │   │   ├── AuthScreen.tsx
-│       │   │   ├── Login.tsx
-│       │   │   └── Register.tsx
 │       │   ├── Editor/
-│       │   │   └── Editor.tsx
 │       │   ├── Preview/
-│       │   │   └── Preview.tsx
 │       │   ├── Sidebar/
-│       │   │   └── Sidebar.tsx
 │       │   ├── FileExplorer/
-│       │   │   ├── FileExplorer.tsx
-│       │   │   ├── FileItem.tsx
-│       │   │   └── FolderItem.tsx
 │       │   └── UI/
-│       │       ├── Button.tsx
-│       │       ├── Input.tsx
-│       │       ├── Navbar.tsx
-│       │       └── AddItemInput.tsx
+│       │
 │       ├── contexts/
-│       │   ├── AuthContext.tsx
-│       │   └── AuthContextDef.ts
 │       ├── hooks/
-│       │   ├── useAuth.ts
-│       │   ├── useDebounce.ts
-│       │   └── useFileSystem.ts
 │       ├── pages/
-│       │   ├── DashboardPage.tsx
-│       │   ├── EditorPage.tsx
-│       │   ├── BlogListPage.tsx
-│       │   ├── BlogDetailPage.tsx
-│       │   └── PublicBlogListPage.tsx
 │       ├── services/
-│       │   └── api.ts
 │       ├── types/
-│       │   └── index.ts
+│       │
 │       ├── App.tsx
 │       ├── main.tsx
 │       └── index.css
@@ -209,156 +247,133 @@ blogspace/
 🧠 Technologies Used
 Technology	Description
 MongoDB	NoSQL database with Mongoose ODM
-Express.js	Backend framework for RESTful API
-React 19	Front-end SPA with TypeScript and hooks
-Node.js	Backend runtime environment
-TypeScript	Type safety throughout the stack
-Tailwind CSS	Utility-first styling with custom plugins
-JWT	Secure user authentication
-Bcrypt	Password hashing (10 salt rounds)
-Vite	Fast frontend build tool with HMR
-React Router DOM v7	Client-side routing with protected routes
-React Markdown	Markdown parsing and rendering
-html2pdf.js	PDF export functionality
-Lucide React	Beautiful, consistent icons
-🎨 Design Highlights
-Dashboard
-Clean analytics overview with stats cards
+Express.js	Backend REST API framework
+React 19	Frontend SPA
+Node.js	Server runtime
+TypeScript	Static typing
+Tailwind CSS	Utility-first styling
+JWT	Authentication system
+Bcrypt	Password hashing
+Vite	Fast build tool
 
-Top performing blogs and recent activity
+Additional Libraries:
 
-Quick actions for new posts and navigation
+React Router DOM v7
 
-Period-based filtering dropdown
+React Markdown
 
-Markdown Editor
-Split-screen layout with live preview
+html2pdf.js
 
-Dark-themed editor for reduced eye strain
-
-PDF export button with formatting options
-
-Line count and auto-save indicators
-
-Blog List
-Advanced search with debounced input
-
-Tag filtering with visual feedback
-
-Sort options for relevance, date, views
-
-Responsive card grid layout
-
-2026 Home Page
-Kinetic typography with gradient animations
-
-Mouse-tracked background orbs
-
-Floating particles and infinite scroll reviews
-
-Neubrutalism cards with hover effects
+Lucide React Icons
 
 🌐 Live Demo
-🔗 Frontend – Explore BlogSpace
-🔗 Backend API – RESTful API endpoint
+
+Frontend:
+https://blogspace-frontend-wxyh.onrender.com/
+
+Backend API:
+https://blogspace-backend.onrender.com/
 
 🚦 Getting Started
 Prerequisites
-Node.js (v18 or higher)
 
-MongoDB (local or Atlas)
+Node.js v18+
+
+MongoDB (Local or Atlas)
 
 npm or yarn
 
 Installation
 Clone the repository
-
-bash
 git clone https://github.com/SHASHWAT13244/blogspace.git
 cd blogspace
 Install backend dependencies
-
-bash
 cd backend
 npm install
 Install frontend dependencies
-
-bash
 cd ../frontend
 npm install
-Environment Setup
-
-Backend (.env):
-
-env
+⚙️ Environment Variables
+Backend .env
 PORT=8000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
-Frontend (.env):
-
-env
+Frontend .env
 VITE_BACKEND_URL=http://localhost:8000/api
-Start development servers
-
-Backend:
-
-bash
+▶️ Run Development Servers
+Backend
 cd backend
 npm run dev
-Frontend (new terminal):
-
-bash
+Frontend
 cd frontend
 npm run dev
-Access the application
+🌍 Access the Application
 
-Frontend: http://localhost:5173
+Frontend
 
-Backend API: http://localhost:8000/api
+http://localhost:5173
 
+Backend API
+
+http://localhost:8000/api
 🧪 Test Credentials
-javascript
 Email: test@example.com
 Password: password123
 📊 API Endpoints
-Authentication (/api/auth)
+Authentication /api/auth
 Method	Endpoint	Description
 POST	/register	Register new user
 POST	/login	Login user
-POST	/refresh	Refresh access token
-POST	/logout	Logout from current device
-POST	/logout-all	Logout from all devices
-File Management (/api/files)
+POST	/refresh	Refresh token
+POST	/logout	Logout current device
+POST	/logout-all	Logout all devices
+File Management /api/files
 Method	Endpoint	Description
-GET	/	Get all files and folders
-POST	/file	Create new file
-POST	/folder	Create new folder
+GET	/	Get files & folders
+POST	/file	Create file
+POST	/folder	Create folder
 PUT	/file/:id	Update file
 PUT	/folder/:id	Update folder
 DELETE	/:id	Delete item
-Blog Routes (/api/blogs)
+Blog Routes /api/blogs
 Public Routes
 Method	Endpoint	Description
-GET	/public	Get all published blogs
-GET	/public/:slug	Get blog by slug
-POST	/public/:id/track	Track interactions
-GET	/public/:id/like-status	Check like status
-GET	/search	Advanced search
+GET	/public	Get published blogs
+GET	/public/:slug	Blog by slug
+POST	/public/:id/track	Track analytics
+GET	/public/:id/like-status	Like status
+GET	/search	Search blogs
 Protected Routes
 Method	Endpoint	Description
 POST	/publish	Publish blog
 GET	/	Get user blogs
-GET	/dashboard	Get dashboard analytics
-GET	/:id	Get specific blog
+GET	/dashboard	Dashboard analytics
+GET	/:id	Get blog
 PUT	/:id	Update blog
 DELETE	/:id	Delete blog
-GET	/:id/analytics	Get blog analytics
-🧑‍💻 Author
+GET	/:id/analytics	Blog analytics
+🛣 Future Improvements
+
+Real-time collaborative editing
+
+Comment system
+
+AI writing assistant
+
+Email newsletter integration
+
+Blog monetization features
+
+👨‍💻 Author
+
 Shashwat Khandelwal
-🎓 B.Tech Computer Science Student | 💻 MERN Stack Developer | 🎨 UI/UX Enthusiast
 
-https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-📧 Email: shashwatk340@gmail.com
+🎓 B.Tech Computer Science Student
+💻 MERN Stack Developer
+🎨 UI/UX Enthusiast
 
-"BlogSpace reflects my commitment to building secure, responsive, and user-focused full-stack applications with cutting-edge UI/UX design."
+📧 Email:
+shashwatk340@gmail.com
+
+GitHub
+https://github.com/SHASHWAT13244
